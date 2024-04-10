@@ -239,13 +239,13 @@ fixtures = [
             ]
         ]
     ]},
-    # {"dt": "Dashboard Chart", "filters": [
-    #     [
-    #         "module", "in", [
-    #             "Asset Management"
-    #         ]
-    #     ]
-    # ]},
+    {"dt": "Dashboard Chart", "filters": [
+        [
+            "module", "in", [
+                "Asset Management"
+            ]
+        ]
+    ]},
     {"dt": "Report", "filters": [
         [
             "module", "in", [
