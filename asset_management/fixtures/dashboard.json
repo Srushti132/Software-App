@@ -1,1 +1,138 @@
-[]
+[
+ {
+  "cards": [
+   {
+    "card": "Total Assets",
+    "parent": "Asset Custom",
+    "parentfield": "cards",
+    "parenttype": "Dashboard"
+   },
+   {
+    "card": "New Assets (This Year)",
+    "parent": "Asset Custom",
+    "parentfield": "cards",
+    "parenttype": "Dashboard"
+   },
+   {
+    "card": "Asset Worth",
+    "parent": "Asset Custom",
+    "parentfield": "cards",
+    "parenttype": "Dashboard"
+   }
+  ],
+  "chart_options": null,
+  "charts": [
+   {
+    "chart": "No Of Pending Assets Requests",
+    "parent": "Asset Custom",
+    "parentfield": "charts",
+    "parenttype": "Dashboard",
+    "width": "Half"
+   },
+   {
+    "chart": "No Of  Assets Requests",
+    "parent": "Asset Custom",
+    "parentfield": "charts",
+    "parenttype": "Dashboard",
+    "width": "Half"
+   },
+   {
+    "chart": "Category Wise Worth",
+    "parent": "Asset Custom",
+    "parentfield": "charts",
+    "parenttype": "Dashboard",
+    "width": "Half"
+   },
+   {
+    "chart": "Asset Category Count",
+    "parent": "Asset Custom",
+    "parentfield": "charts",
+    "parenttype": "Dashboard",
+    "width": "Half"
+   },
+   {
+    "chart": "Asset Location Count",
+    "parent": "Asset Custom",
+    "parentfield": "charts",
+    "parenttype": "Dashboard",
+    "width": "Half"
+   },
+   {
+    "chart": "Location wise worth",
+    "parent": "Asset Custom",
+    "parentfield": "charts",
+    "parenttype": "Dashboard",
+    "width": "Half"
+   }
+  ],
+  "dashboard_name": "Asset Custom",
+  "docstatus": 0,
+  "doctype": "Dashboard",
+  "is_default": 0,
+  "is_standard": 1,
+  "modified": "2023-11-06 16:38:14.123131",
+  "module": "Asset Management",
+  "name": "Asset Custom"
+ },
+ {
+  "cards": [
+   {
+    "card": "Total Software Requests-1",
+    "parent": "Software Management",
+    "parentfield": "cards",
+    "parenttype": "Dashboard"
+   },
+   {
+    "card": "Total Software License",
+    "parent": "Software Management",
+    "parentfield": "cards",
+    "parenttype": "Dashboard"
+   },
+   {
+    "card": "New Software (This year)",
+    "parent": "Software Management",
+    "parentfield": "cards",
+    "parenttype": "Dashboard"
+   }
+  ],
+  "chart_options": null,
+  "charts": [
+   {
+    "chart": "Type wise Software License Count",
+    "parent": "Software Management",
+    "parentfield": "charts",
+    "parenttype": "Dashboard",
+    "width": "Half"
+   },
+   {
+    "chart": "Brand Wise Count",
+    "parent": "Software Management",
+    "parentfield": "charts",
+    "parenttype": "Dashboard",
+    "width": "Half"
+   },
+   {
+    "chart": "Software Category Wise Count",
+    "parent": "Software Management",
+    "parentfield": "charts",
+    "parenttype": "Dashboard",
+    "width": "Half"
+   },
+   {
+    "chart": "Department Wise Count",
+    "parent": "Software Management",
+    "parentfield": "charts",
+    "parenttype": "Dashboard",
+    "width": "Half"
+   }
+  ],
+  "dashboard_name": "Software Management",
+  "docstatus": 0,
+  "doctype": "Dashboard",
+  "is_default": 1,
+  "is_standard": 1,
+  "modified": "2023-11-06 14:07:29.180886",
+  "module": "Asset Management",
+  "name": "Software Management"
+ }
+]

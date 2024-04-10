@@ -263,7 +263,7 @@ fixtures = [
     {"dt": "Dashboard", "filters": [
         [
             "name", "in", [
-                "Asset Management"
+                "Asset Custom","Software Management"
             ]
         ]
     ]},
