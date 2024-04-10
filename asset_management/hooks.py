@@ -255,7 +255,7 @@ fixtures = [
     ]},
     {"dt": "Number Card", "filters": [
         [
-            "name", "in", [
+            "module", "in", [
                 "Asset Management"
             ]
         ]
