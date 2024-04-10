@@ -1,0 +1,197 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2023-11-24 15:10:24.521910",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "company",
+  "software_id",
+  "software_code",
+  "software_version",
+  "software_type",
+  "column_break_aww6r",
+  "naming_series",
+  "software_name",
+  "software_category",
+  "brand",
+  "user_access",
+  "user_assigned",
+  "total_access",
+  "purchase_details_section",
+  "purchase_details",
+  "availability_tab",
+  "start_date",
+  "column_break_iqkqd",
+  "end_date",
+  "users_tab",
+  "users"
+ ],
+ "fields": [
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "software_id",
+   "fieldtype": "Data",
+   "label": "Software ID",
+   "read_only": 1
+  },
+  {
+   "fieldname": "software_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Software Code",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "software_version",
+   "fieldtype": "Data",
+   "label": "Software Version"
+  },
+  {
+   "fetch_from": "software_code.custom_software_type",
+   "fieldname": "software_type",
+   "fieldtype": "Data",
+   "label": "Software Type"
+  },
+  {
+   "fieldname": "column_break_aww6r",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Naming Series",
+   "options": "STPL-SAS-.###"
+  },
+  {
+   "fetch_from": "software_code.item_name",
+   "fieldname": "software_name",
+   "fieldtype": "Data",
+   "label": "Software Name"
+  },
+  {
+   "fieldname": "software_category",
+   "fieldtype": "Link",
+   "label": "Software Category",
+   "options": "Software License Category"
+  },
+  {
+   "fetch_from": "software_code.brand",
+   "fieldname": "brand",
+   "fieldtype": "Link",
+   "label": "Brand",
+   "options": "Brand"
+  },
+  {
+   "fieldname": "user_access",
+   "fieldtype": "Data",
+   "label": "User Access"
+  },
+  {
+   "depends_on": "user_access",
+   "fieldname": "user_assigned",
+   "fieldtype": "Data",
+   "label": "User Assigned",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_access",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Total Access",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval: doc.software_code && doc.software_type != 'Free'",
+   "fieldname": "purchase_details_section",
+   "fieldtype": "Section Break",
+   "label": "Purchase Details"
+  },
+  {
+   "fieldname": "purchase_details",
+   "fieldtype": "Table",
+   "label": "Purchase Details",
+   "mandatory_depends_on": "eval: doc.software_type == \"Subscription\" || doc.software_type == \"One-Time Paid\"\n",
+   "options": "Purchase Details"
+  },
+  {
+   "fieldname": "availability_tab",
+   "fieldtype": "Tab Break",
+   "label": "Availability"
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Start Date"
+  },
+  {
+   "fieldname": "column_break_iqkqd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "End Date"
+  },
+  {
+   "fieldname": "users_tab",
+   "fieldtype": "Tab Break",
+   "label": "Users"
+  },
+  {
+   "fieldname": "users",
+   "fieldtype": "Table",
+   "label": "Users",
+   "options": "Software License Users"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-04-10 11:38:58.393119",
+ "modified_by": "Administrator",
+ "module": "Asset Management",
+ "name": "Software License",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Asset Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "search_fields": "software_name,software_version,brand",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

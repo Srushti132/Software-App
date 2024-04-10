@@ -1,0 +1,72 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-11-24 15:11:24.200295",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "company",
+  "software_id",
+  "software_name",
+  "from_employee",
+  "to_employee",
+  "enable"
+ ],
+ "fields": [
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "software_id",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Software ID",
+   "options": "Software License"
+  },
+  {
+   "fetch_from": "software_id.software_name",
+   "fieldname": "software_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Software Name"
+  },
+  {
+   "fieldname": "from_employee",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "From Employee",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "to_employee",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "To Employee",
+   "options": "Employee"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "enable",
+   "fieldtype": "Check",
+   "label": "enable"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-04-10 11:38:58.155265",
+ "modified_by": "Administrator",
+ "module": "Asset Management",
+ "name": "Software License Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

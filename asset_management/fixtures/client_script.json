@@ -1,0 +1,123 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Software License",
+  "enabled": 1,
+  "modified": "2023-10-31 14:52:38.418586",
+  "module": "Asset Management",
+  "name": "Software One Time Paid",
+  "script": "frappe.ui.form.on(\"Software License\", {\n    validate: function(frm) {\n        if (frm.doc.software_type === \"One Time Paid\") {\n            var purchaseDetailsTable = frm.doc.purchase_details;\n            if (purchaseDetailsTable.length > 1) {\n                frappe.msgprint(\"You can only enter one row of data for 'One Time Paid' software.\");\n                frappe.validated = false;\n                \n                // Remove extra rows from the child table\n                while (purchaseDetailsTable.length > 1) {\n                    frm.doc.purchase_details.pop();\n                }\n                \n                // Refresh the form to reflect the changes\n                frm.refresh_field(\"purchase_details\");\n            }\n        }\n    }\n});\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Software License",
+  "enabled": 1,
+  "modified": "2024-01-08 14:35:03.401180",
+  "module": "Asset Management",
+  "name": "Software License Scripts",
+  "script": "frappe.ui.form.on('Software License', {\n    \n    refresh: function(frm) {\n        frm.fields_dict['software_code'].get_query = function() {\n            return {\n                filters: [\n                    ['Item', 'is_stock_item', '=', 0],\n                    ['Item', 'is_fixed_asset', '=', 0],\n                    ['Item', 'item_group', '=', \"Software License\"]\n                ]\n            };\n        };\n        \n        if (frm.doc.__islocal) {\n            frm.set_df_property('user_access', 'read_only', 0);\n        } else {\n            frm.set_df_property('user_access', 'read_only', 1);\n        }\n    },\n    \n    before_save:function(frm){\n        var purchaseDetails = frm.doc.purchase_details || [];\n        \n        if(purchaseDetails.length > 0){\n            purchaseDetails[purchaseDetails.length - 1].enable = 1;\n            \n            for (var i=0;i<purchaseDetails.length - 1; i++){\n                purchaseDetails[i].enable=0;\n            }\n            \n            frm.refresh_field('purchase_details');\n        }\n    },\n    after_save:function(frm){\n         $.each(frm.doc.purchase_details || [], function(i, d) {\n            if (d.enable == 1) {\n                frappe.call({\n                    method:'SetDates',\n                    args:{\n                        'start_date':d.purchase_date,\n                        'end_date':d.end_date,\n                        'software_id':frm.doc.name\n                    },\n                });\n            }\n            frm.save()\n                \n         });\n    },\n    \n    software_code: function(frm) {\n        var dataList=[];\n        frappe.call({\n                    method: 'Invoices',\n                    args:{\n                        'software_code':frm.doc.software_code\n                    },\n                    callback:function(r){\n                        if(r.message){\n                            for(var i=0;i<r.message.length;i++){\n                                dataList.push(r.message[i][\"name\"]);\n                            }\n                        }\n                    }\n                });\n        frm.set_query(\"software_invoice\", \"purchase_details\", function (doc, cdt, cdn) {\n        return {\n          filters: {\n            name: [\"in\", dataList],\n          },\n        };\n      });\n    }\n});\n\nfrappe.ui.form.on('Purchase Details', {\n\n\tsoftware_invoice:function(frm,cdt,cdn){\n\t    const row=locals[cdt][cdn];\n\t    const softwareinvoice=row.software_invoice;\n\n\t    frappe.call({\n\t        method:'end-date',\n\t        args:{\n\t            'software_invoice':softwareinvoice\n\t        },\n\t        callback:function(r){\n\t            if(r.message && r.message.length > 0){\n\t         $.each(frm.doc.purchase_details || [], function(i, d) {\n             if (d.software_invoice == softwareinvoice) {\n                    d.end_date= r.message[0][\"custom_end_date\"]\n             }\n         })\n         frm.refresh_field(\"purchase_details\");\n\t           \n\t            }\n\t        }\n\t    });\n\t    \n\t   \n\t},\n});\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Software Assignment",
+  "enabled": 1,
+  "modified": "2023-10-27 17:32:41.835933",
+  "module": "Asset Management",
+  "name": "UserLimit_Custom",
+  "script": "\nfrappe.ui.form.on('Software Assignment', {\n    refresh: function(frm) {\n        frm.fields_dict['software_license'].grid.get_field('software_id').get_query = function(doc, cdt, cdn) {\n            return {\n                filters: [\n                    ['user_access', '>', '0'],\n                ]\n            };\n        };\n\n    }\n});\n\nfrappe.ui.form.on('Software License Item', {\n    software_id: function(frm, cdt, cdn){\n        let item = locals[cdt][cdn];\n\t\tfrappe.call({\n\t\t    method: \"Userlimitchecker\",\n\t\t    args:{\n\t\t      \"software_id\": item.software_id,\n\t\t    }\n\t\t}).then(records =>{\n\t\t    var data = records['message']\n\t\t    \n\t\t    data.forEach(function(obj){\n\t\t        \n\t\t        var childTableLength = frm.doc.software_license.length;\n\t\t        var user_that_can_be_assigned = obj.user_access;\n                if(childTableLength > user_that_can_be_assigned){\n                    frappe.msgprint(`${item.software_name} assignment limit has been reached!`);\n                     return false;\n                }\n\t\t    })\n\t\t})\n\t}\n})\n\n\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Software Assignment",
+  "enabled": 0,
+  "modified": "2023-11-25 10:24:08.767207",
+  "module": "Asset Management",
+  "name": "Software Assignment Scripts",
+  "script": "frappe.ui.form.on('Software Assignment', {\n    on_submit: function (frm) {\n        var tableData = frm.doc.software_license || [];\n\n        if (frm.doc.purpose != 'Re-Assign') {\n            tableData.forEach(function(item) {\n                if (frm.doc.purpose == 'Assign') {\n                    frappe.call({\n                        method: 'TotalAssigned',\n                        args: {\n                            'software_id': item.software_id\n                        }\n                    });\n                } else {\n                    frappe.call({\n                        method: 'EnableAssigned',\n                        args: {\n                            'software_id': item.software_id,\n                            'software_assignment': frm.doc.software_assignment,\n                            'from_employee': item.from_employee\n                        },\n                        callback: function(r) {\n                            frappe.call({\n                                method:'TotalAssign2',\n                                args:{\n                                    'software_id': item.software_id\n                                }\n                            });\n                        }\n                    });\n                }\n            });\n        }else{\n            tableData.forEach(function(item){\n                frappe.call({\n                    method:'TotalAssign3',\n                    args:{\n                        'software_id':item.software_id,\n                        'from_employee':item.from_employee,\n                        'to_employee':item.to_employee\n                    }\n                });\n            });\n        }\n    },\n    \n\n    software_assignment:function(frm){\n        var data = [];\n            frappe.call({\n                method:'software_id related to software assignment',\n                args: {\n                    // 'software_id':software_id,\n                    'software_assignment':frm.doc.software_assignment\n                },\n                callback:function(r){\n                    if(r.message){\n                        // console.log(typeof(r.message));\n                        for(var i=0;i<r.message.length;i++){\n                            data.push(r.message[i][\"software_id\"])\n                        }\n\n                    }\n                }\n            });\n            frm.set_query(\"software_id\",\"software_license\",function(doc,cdt,cdn){\n                return{\n                    filters:{\n                        name:['in',data],\n                        }\n                    };\n                });\n    },\n    \n    \n\n});",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Software Assignment",
+  "enabled": 0,
+  "modified": "2023-10-27 17:32:41.804988",
+  "module": "Asset Management",
+  "name": "Employee Filter",
+  "script": "frappe.ui.form.on('Software License Item', {\n    software_id: function (frm, cdt, cdn) {\n        const child = locals[cdt][cdn];\n        const software_id = child.software_id;\n        var data = [];\n\n        frappe.call({\n            method: 'FromEmployee',\n            args: {\n                'software_id': software_id,\n            },\n            callback: function (r) {\n                if (r.message) {\n                    for(let i in r.message){\n                        data.push(r.message[i]);\n                    }\n                    console.log(data + \"___\");\n                    // console.log(child.idx);\n                    frm.set_query(\"to_employee\", \"software_license\", function(doc, cdt, cdn) {\n                        return {\n                            filters: [\n                                ['name', 'in', data],\n                            ]\n                        };\n                    });\n\n                    frm.refresh_field(\"software_license\");\n                }\n            }\n        });\n    }\n});\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Purchase Invoice",
+  "enabled": 0,
+  "modified": "2023-10-27 17:32:41.760523",
+  "module": "Asset Management",
+  "name": "Software License Creation Button",
+  "script": "frappe.ui.form.on('Purchase Invoice', {\n    refresh(frm) {\n        // Check if the document is submitted and not a return\n        if (frm.doc.docstatus == 1 && frm.doc.is_return != 1) {\n            frm.add_custom_button(__('Software license Creation'), function () {\n                // Replace this code with your custom logic\n                frappe.new_doc('Software License', {\n                    // purchase_invoice: frm.doc.name // Pass any required data as fields\n                });            }, __('Create'));\n        }\n    }\n});\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Software Assignment",
+  "enabled": 1,
+  "modified": "2023-10-27 17:32:41.558166",
+  "module": "Asset Management",
+  "name": "filter apply",
+  "script": "cur_frm.set_query(\"from_employee\", \"software_license\", function(doc, cdt, cdn) {\n    var table = locals[cdt][cdn];\n    var softwareId = table.software_id;\n    let final_data\n\n    frappe.call({\n        method: \"fetch_data_from_user_and_softwares\",\n        args: { 'name': softwareId },\n        async: false,\n        callback: function(response){\n            var data = response.message\n            final_data = data\n        }\n    })\n    return {\n        filters: [\n            [\"name\", \"not in\", final_data]\n        ]\n    };\n})\n\ncur_frm.set_query(\"to_employee\", \"software_license\", function(doc, cdt, cdn) {\n    var table = locals[cdt][cdn];\n    var softwareId = table.software_id;\n    let final_data\n\n    frappe.call({\n        method: \"fetch_data_from_user_and_softwares\",\n        args: { 'name': softwareId },\n        async: false,\n        callback: function(response){\n            var data = response.message\n            final_data = data\n        }\n    })\n    return {\n        filters: [\n            [\"name\", \"in\", final_data]\n        ]\n    };\n})",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Software Assignment",
+  "enabled": 1,
+  "modified": "2023-11-06 13:39:36.895765",
+  "module": "Asset Management",
+  "name": "Filter for Software Assignment",
+  "script": "frappe.ui.form.on('Software Assignment', {\n    refresh: function(frm) {\n        var dataList=[];\n        frappe.call({\n                    method: 'Filtered Assignments',\n                    callback:function(r){\n                        if(r.message){\n                            for(var i=0;i<r.message.length;i++){\n                                dataList.push(r.message[i][\"name\"]);\n                            }\n                        }\n                    }\n                });\n        frm.set_query(\"software_assignment\",function (doc) {\n        return {\n          filters: {\n            name: [\"in\", dataList],\n          },\n        };\n      });\n    }\n});",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Software Assignment",
+  "enabled": 1,
+  "modified": "2023-11-25 10:25:36.702221",
+  "module": "Asset Management",
+  "name": "Fields to be altered according to Purpose",
+  "script": "frappe.ui.form.on('Software Assignment', {\n\trefresh: (frm) => {\n\t\tfrm.trigger('set_required_fields');\n        // set_required_fields(frm ,cdt, cdn)\n\t},\n\n\tpurpose: (frm) => {\n\t\tfrm.trigger('set_required_fields');\n\t},\n\n\t\n\tset_required_fields: (frm, cdt, cdn) => {\n\t\tlet fieldnames_to_be_altered;\n\t\tif (frm.doc.purpose === 'Assign') {\n\t\t\tfieldnames_to_be_altered = {\n\t\t\t\tfrom_employee: { read_only: 1, reqd: 0 },\n\t\t\t\tto_employee: { read_only: 0, reqd: 1 }\n\t\t\t};\n\t\t}\n\t\telse if(frm.doc.purpose === 'Re-Assign'){\n\t\t\tfieldnames_to_be_altered = {\n\t\t\t\tfrom_employee: { read_only: 0, reqd: 1 },\n\t\t\t\tto_employee: { read_only: 0, reqd: 1 }\n\t\t\t};\n\t\t}\n\t\telse if (frm.doc.purpose === 'Withdraw') {\n\t\t\tfieldnames_to_be_altered = {\n\t\t\t\tfrom_employee: { read_only: 0, reqd: 1 },\n\t\t\t\tto_employee: { read_only: 1, reqd: 0 }\n\t\t\t};\n\t\t}\n\t\tif (fieldnames_to_be_altered) {\n\t\t\tObject.keys(fieldnames_to_be_altered).forEach(fieldname => {\n\t\t\t\tlet property_to_be_altered = fieldnames_to_be_altered[fieldname];\n\t\t\t\tObject.keys(property_to_be_altered).forEach(property => {\n\t\t\t\t\tlet value = property_to_be_altered[property];\n\t\t\t\t\tfrm.fields_dict['software_license'].grid.update_docfield_property(fieldname, property, value);\n\t\t\t\t});\n\t\t\t});\n\t\t\tfrm.refresh_field('software_license');\n\t\t}\n\t},\n\t\n\n});\n",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Software Assignment",
+  "enabled": 1,
+  "modified": "2023-11-25 13:09:44.197850",
+  "module": "Asset Management",
+  "name": "Assignement Purpose Scripts",
+  "script": "frappe.ui.form.on('Software Assignment', {\n    on_submit: function (frm) {\n        // Get the purpose field value\n        const purpose = frm.doc.purpose;\n        var tableData = frm.doc.software_license || [];\n \n\n        // Check if the purpose is 'Assign', 'Re-Assign', or 'Withdraw'\n        tableData.forEach(function(item){\n            console.log(\"Hey\")\n        // for (let i = 0; i < tableData.length; i++){\n        //     const item = tableData[i];\n            \n            if (purpose === 'Assign') {\n                // Trigger server script for 'Assign' logic\n                frappe.call({\n                    method: 'handle_assign',\n                    args: {\n                        'software_id': item.software_id,\n                        'to_employee': item.to_employee\n                    },\n                    async: false,\n                    callback: function (response) {\n                        // Handle any callback logic if needed\n                    }\n                });\n            } else if (purpose === 'Re-Assign') {\n                // Trigger server script for 'Re-Assign' logic\n                frappe.call({\n                    method: 'handle_re_assign',\n                    args: {\n                        'software_id': item.software_id,\n                        'from_employee': item.from_employee,\n                        'to_employee': item.to_employee\n                        \n                    },\n                    async: false,\n                    callback: function (response) {\n                        // Handle any callback logic if needed\n                    }\n                });\n            } else if (purpose === 'Withdraw') {\n                // Trigger server script for 'Withdraw' logic\n                frappe.call({\n                    method: 'handle_withdraw',\n                    args: {\n                        'software_id': item.software_id,\n                        'from_employee': item.from_employee,\n                    },\n                    async: false,\n                    callback: function (response) {\n                        // Handle any callback logic if needed\n                    }\n                });\n            }\n        });\n\n    }\n});",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Software License",
+  "enabled": 1,
+  "modified": "2023-11-25 14:24:12.801434",
+  "module": "Asset Management",
+  "name": "Calculation for user access and user assigned for software license",
+  "script": "frappe.ui.form.on('Software License', {\n    onload: function (frm) {\n        // Check if the 'users' table exists\n        if (frm.doc.users) {\n            // Count the number of rows in the 'users' table\n            var usersCount = frm.doc.users.length;\n            var total = frm.doc.total_access;\n            var usraccess  = total - usersCount;\n            console.log('Users Count:', usersCount);\n            // Set the count in the 'users_count' field\n            frm.set_value('user_assigned', usersCount);\n            frm.set_value('user_access',usraccess);\n            console.log('Value Set');\n            // Refresh the 'users_count' field in the UI\n            frm.refresh_field('user_assigned');\n            console.log('Field Refreshed');\n            frm.save()\n        }\n    }\n});\n",
+  "view": "Form"
+ }
+]
