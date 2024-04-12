@@ -7,20 +7,14 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "company",
   "software_id",
   "software_name",
   "from_employee",
   "to_employee",
-  "enable"
+  "version",
+  "license_key"
  ],
  "fields": [
-  {
-   "fieldname": "company",
-   "fieldtype": "Link",
-   "label": "Company",
-   "options": "Company"
-  },
   {
    "fieldname": "software_id",
    "fieldtype": "Link",
@@ -50,17 +44,22 @@
    "options": "Employee"
   },
   {
-   "allow_on_submit": 1,
-   "default": "0",
-   "fieldname": "enable",
-   "fieldtype": "Check",
-   "label": "enable"
+   "fieldname": "version",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Version"
+  },
+  {
+   "fieldname": "license_key",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "License Key"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-04-10 11:38:58.155265",
+ "modified": "2024-04-12 11:03:33.362074",
  "modified_by": "Administrator",
  "module": "Asset Management",
  "name": "Software License Item",

@@ -1,0 +1,123 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-04-11 13:07:20.655732",
+ "default_view": "List",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "employee_id",
+  "employee_name",
+  "project",
+  "software_license",
+  "software_version",
+  "assest_manager",
+  "remark",
+  "column_break_pyjd",
+  "required_by",
+  "department",
+  "branch",
+  "purpose_of_requirement",
+  "status"
+ ],
+ "fields": [
+  {
+   "fetch_from": "employee_id.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "label": "Employee Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "Project Name",
+   "options": "Project"
+  },
+  {
+   "fieldname": "software_license",
+   "fieldtype": "Data",
+   "label": "Software Name"
+  },
+  {
+   "fieldname": "software_version",
+   "fieldtype": "Data",
+   "label": "Software Version"
+  },
+  {
+   "fieldname": "column_break_pyjd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "required_by",
+   "fieldtype": "Date",
+   "label": "Required By"
+  },
+  {
+   "fetch_from": "employee_id.department",
+   "fieldname": "department",
+   "fieldtype": "Data",
+   "label": "Department",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee_id.branch",
+   "fieldname": "branch",
+   "fieldtype": "Data",
+   "label": "Branch",
+   "read_only": 1
+  },
+  {
+   "fieldname": "purpose_of_requirement",
+   "fieldtype": "Small Text",
+   "label": "Purpose Of Requirement"
+  },
+  {
+   "fieldname": "employee_id",
+   "fieldtype": "Link",
+   "label": "Employee Id",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nRequested\nRejected\nDelivered\nIn Process"
+  },
+  {
+   "fieldname": "assest_manager",
+   "fieldtype": "Link",
+   "label": "Assest Manager",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "remark",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-04-12 10:04:01.114294",
+ "modified_by": "Administrator",
+ "module": "Asset Management",
+ "name": "Software Request",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,82 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-04-11 15:06:15.398120",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "software_id",
+  "assigned_employee",
+  "software_name",
+  "column_break_khro",
+  "status",
+  "compatibility_issue",
+  "remarks"
+ ],
+ "fields": [
+  {
+   "fetch_from": "software_id.software_name",
+   "fieldname": "software_name",
+   "fieldtype": "Data",
+   "label": "Software Name"
+  },
+  {
+   "fieldname": "column_break_khro",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nDeployed\nPending\nFailed\nSuccessful"
+  },
+  {
+   "fieldname": "assigned_employee",
+   "fieldtype": "Link",
+   "label": "Assigned Employee",
+   "options": "Employee"
+  },
+  {
+   "default": "0",
+   "fieldname": "compatibility_issue",
+   "fieldtype": "Check",
+   "label": "Compatibility Issue "
+  },
+  {
+   "depends_on": "eval:doc.compatibility_issue == 1;",
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "software_id",
+   "fieldtype": "Link",
+   "label": "Software Id",
+   "options": "Software License"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-04-12 10:56:55.196074",
+ "modified_by": "Administrator",
+ "module": "Asset Management",
+ "name": "Software Deployment",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

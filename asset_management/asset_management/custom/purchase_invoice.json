@@ -28,7 +28,6 @@
    "report": 0,
    "role": "Accounts Manager",
    "select": 0,
-   "set_user_permissions": 0,
    "share": 0,
    "submit": 0,
    "write": 1
@@ -60,7 +59,6 @@
    "report": 1,
    "role": "Auditor",
    "select": 0,
-   "set_user_permissions": 0,
    "share": 0,
    "submit": 0,
    "write": 0
@@ -92,7 +90,6 @@
    "report": 1,
    "role": "Accounts User",
    "select": 0,
-   "set_user_permissions": 0,
    "share": 1,
    "submit": 1,
    "write": 1
@@ -124,7 +121,6 @@
    "report": 1,
    "role": "Purchase User",
    "select": 0,
-   "set_user_permissions": 0,
    "share": 0,
    "submit": 0,
    "write": 0
@@ -156,7 +152,6 @@
    "report": 1,
    "role": "Accounts Manager",
    "select": 0,
-   "set_user_permissions": 0,
    "share": 1,
    "submit": 1,
    "write": 1
@@ -188,7 +183,6 @@
    "report": 1,
    "role": "Asset Manager",
    "select": 1,
-   "set_user_permissions": 0,
    "share": 0,
    "submit": 1,
    "write": 1

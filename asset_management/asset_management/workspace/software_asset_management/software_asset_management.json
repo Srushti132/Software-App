@@ -1,0 +1,105 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"b2N4-f0M0j\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Software Asset Management</span>\",\"col\":12}},{\"id\":\"fzZpjvKjft\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Software Request\",\"col\":3}},{\"id\":\"_tLwq-UsIk\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Software License\",\"col\":3}},{\"id\":\"-dbBGBfTT-\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Licence Brand\",\"col\":3}},{\"id\":\"HHuBz0xdum\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Software Assignment\",\"col\":3}},{\"id\":\"VPG_wYJFmu\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Software Deployment\",\"col\":3}},{\"id\":\"Cip6BLLhyH\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"y3qPohbte9\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Dashboards</b></span>\",\"col\":12}},{\"id\":\"7lygqdlzBK\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Software Management\",\"col\":3}},{\"id\":\"rpTbQJAuqv\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"rfZDLWqpHS\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Reports</b></span>\",\"col\":12}},{\"id\":\"05um3z7WKW\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Software Category Wise Count\",\"col\":3}},{\"id\":\"JUP8gFmYID\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Software Category Count\",\"col\":3}},{\"id\":\"z-ukee8uq8\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Software Request\",\"col\":3}},{\"id\":\"aL7dGV2zXH\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Software Expiry\",\"col\":3}},{\"id\":\"njid4z7iOY\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Software Assignment Report\",\"col\":3}}]",
+ "creation": "2024-04-10 12:45:03.104057",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "website",
+ "idx": 0,
+ "indicator_color": "",
+ "is_hidden": 0,
+ "label": "Software Asset Management",
+ "links": [],
+ "modified": "2024-04-12 11:10:48.945783",
+ "modified_by": "Administrator",
+ "module": "Asset Management",
+ "name": "Software Asset Management",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 24.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Software Category Wise Count",
+   "link_to": "Software Category Wise Count",
+   "type": "Report"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Software Request",
+   "link_to": "Software Request",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Software Management",
+   "link_to": "Software Management",
+   "type": "Dashboard"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Software Assignment Report",
+   "link_to": "Software Assignment Report",
+   "type": "Report"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Licence Brand",
+   "link_to": "Licence Brand",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Software Assignment",
+   "link_to": "Software Assignment",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Software Category Count",
+   "link_to": "Software Category Count",
+   "type": "Report"
+  },
+  {
+   "color": "Cyan",
+   "doc_view": "List",
+   "label": "Software Deployment",
+   "link_to": "Software Deployment",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Blue",
+   "doc_view": "List",
+   "label": "Software License",
+   "link_to": "Software License",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Software Expiry",
+   "link_to": "Software Expiry",
+   "type": "Report"
+  }
+ ],
+ "title": "Software Asset Management"
+}

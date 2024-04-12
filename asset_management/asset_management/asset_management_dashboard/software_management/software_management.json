@@ -1,0 +1,43 @@
+{
+ "cards": [
+  {
+   "card": "Total Software Requests-1"
+  },
+  {
+   "card": "Total Software License"
+  },
+  {
+   "card": "New Software (This year)"
+  }
+ ],
+ "charts": [
+  {
+   "chart": "Type wise Software License Count",
+   "width": "Half"
+  },
+  {
+   "chart": "Brand Wise Count",
+   "width": "Half"
+  },
+  {
+   "chart": "Software Category Wise Count",
+   "width": "Half"
+  },
+  {
+   "chart": "Department Wise Count",
+   "width": "Half"
+  }
+ ],
+ "creation": "2024-04-10 12:45:09.839785",
+ "dashboard_name": "Software Management",
+ "docstatus": 0,
+ "doctype": "Dashboard",
+ "idx": 0,
+ "is_default": 1,
+ "is_standard": 1,
+ "modified": "2024-04-10 17:08:42.724155",
+ "modified_by": "deep@sanskartechnolab.com",
+ "module": "Asset Management",
+ "name": "Software Management",
+ "owner": "Administrator"
+}

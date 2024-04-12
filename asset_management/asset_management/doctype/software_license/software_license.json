@@ -13,6 +13,8 @@
   "software_code",
   "software_version",
   "software_type",
+  "license_key",
+  "date",
   "column_break_aww6r",
   "naming_series",
   "software_name",
@@ -28,7 +30,9 @@
   "column_break_iqkqd",
   "end_date",
   "users_tab",
-  "users"
+  "users",
+  "history_tab",
+  "software_history"
  ],
  "fields": [
   {
@@ -52,6 +56,7 @@
    "reqd": 1
   },
   {
+   "fetch_from": "software_code.version",
    "fieldname": "software_version",
    "fieldtype": "Data",
    "label": "Software Version"
@@ -107,8 +112,7 @@
    "fieldname": "total_access",
    "fieldtype": "Data",
    "hidden": 1,
-   "label": "Total Access",
-   "read_only": 1
+   "label": "Total Access"
   },
   {
    "depends_on": "eval: doc.software_code && doc.software_type != 'Free'",
@@ -152,11 +156,32 @@
    "fieldtype": "Table",
    "label": "Users",
    "options": "Software License Users"
+  },
+  {
+   "fieldname": "history_tab",
+   "fieldtype": "Tab Break",
+   "label": "History"
+  },
+  {
+   "fieldname": "software_history",
+   "fieldtype": "Table",
+   "label": "Software History ",
+   "options": "Version History"
+  },
+  {
+   "fieldname": "license_key",
+   "fieldtype": "Data",
+   "label": "License Key"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-04-10 11:38:58.393119",
+ "modified": "2024-04-12 10:32:41.925236",
  "modified_by": "Administrator",
  "module": "Asset Management",
  "name": "Software License",

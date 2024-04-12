@@ -15,8 +15,7 @@
   "transaction_date",
   "transaction_time",
   "assignment_history_section",
-  "software_license",
-  "amended_from"
+  "software_license"
  ],
  "fields": [
   {
@@ -65,21 +64,12 @@
    "fieldtype": "Table",
    "label": "Software License",
    "options": "Software License Item"
-  },
-  {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Software Assignment",
-   "print_hide": 1,
-   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-04-10 11:38:37.897386",
+ "modified": "2024-04-11 17:51:59.176473",
  "modified_by": "Administrator",
  "module": "Asset Management",
  "name": "Software Assignment",

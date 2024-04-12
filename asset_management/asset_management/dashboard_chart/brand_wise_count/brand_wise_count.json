@@ -1,0 +1,37 @@
+{
+ "chart_name": "Brand Wise Count",
+ "chart_type": "Report",
+ "creation": "2024-04-10 12:45:10.378482",
+ "docstatus": 0,
+ "doctype": "Dashboard Chart",
+ "dynamic_filters_json": "{}",
+ "filters_json": "{}",
+ "group_by_type": "Count",
+ "idx": 0,
+ "is_public": 1,
+ "is_standard": 1,
+ "modified": "2024-04-10 17:07:52.643427",
+ "modified_by": "deep@sanskartechnolab.com",
+ "module": "Asset Management",
+ "name": "Brand Wise Count",
+ "number_of_groups": 0,
+ "owner": "Administrator",
+ "report_name": "Brand Wise Count",
+ "roles": [
+  {
+   "role": "Asset Manager"
+  }
+ ],
+ "time_interval": "Yearly",
+ "timeseries": 0,
+ "timespan": "Last Year",
+ "type": "Pie",
+ "use_report_chart": 0,
+ "x_field": "brand",
+ "y_axis": [
+  {
+   "color": "#4463F0",
+   "y_field": "no"
+  }
+ ]
+}
